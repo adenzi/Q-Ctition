@@ -4,7 +4,6 @@ const nodemailer = require('nodemailer');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 
-
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs'); // Using EJS for templating
@@ -14,13 +13,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/', (req, res) => {
-    const { name, grade, age, school_branch, known_chapters } = req.body;
+    const { name, grade, age, school_branch, known_chapters, email } = req.body; // Add email to the destructured object
 
     // Generate a unique ID for the submission
     const unique_id = uuidv4();
     
     // Send email
-    sendEmail(name, grade, age, school_branch, known_chapters, unique_id);
+    sendEmail(name, grade, age, school_branch, known_chapters, unique_id, email); // Pass email to the function
     
     // Write to file
     writeToFile(name, grade, age, school_branch, known_chapters, unique_id);
@@ -33,21 +32,21 @@ app.get('/thank_you', (req, res) => {
     res.send("شكرا لتقديمكم معنا");
 });
 
-function sendEmail(name, grade, age, school_branch, known_chapters, unique_id) {
-    const user = process.env.GMAIL_USER;
-    const password = process.env.GMAIL_PASSWORD;
+function sendEmail(name, grade, age, school_branch, known_chapters, unique_id, userEmail) {
+    const user = process.env.GMAIL_USER; // Ensure you set this in your environment variables
+    const password = process.env.GMAIL_PASSWORD; // Ensure you set this in your environment variables
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: "opuzum@gmail.com",
-            pass: "pnaw uetq rsab xynm"
+            user: user,
+            pass: password
         }
     });
 
     const mailOptions = {
         from: user,
-        to: ['adiscord91900130@gmail.com', 'opuzum@gmail.com'],
+        to: ['adiscord91900130@gmail.com', 'opuzum@gmail.com', userEmail], // Add user email as a recipient
         subject: `تقديم جديد في المسابقة ${name}`,
         text: `مرحبا, هناك مشترك جديد في المسابقة\n
         الرقم الفريد: ${unique_id}\n
