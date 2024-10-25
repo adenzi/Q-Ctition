@@ -1,3 +1,4 @@
+
 {
   "name": "your-project-name",
   "version": "0.0.1",
@@ -11,8 +12,7 @@
     "nodemailer": "^6.9.15",
     "uuid": "^8.3.2",
     "body-parser": "^1.19.0",
-    "ejs": "^3.1.10",
- 
+    "ejs": "^3.1.10"
   },
   "engines": {
     "node": "14.x"
