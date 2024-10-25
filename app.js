@@ -33,20 +33,19 @@ app.get('/thank_you', (req, res) => {
 });
 
 function sendEmail(name, grade, age, school_branch, known_chapters, unique_id, userEmail) {
-    const user = process.env.GMAIL_USER; // Ensure you set this in your environment variables
-    const password = process.env.GMAIL_PASSWORD; // Ensure you set this in your environment variables
+  
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: user,
-            pass: password
+           user: process.env.GMAIL_USER,
+        pass: process.env.GMAIL_PASSWORD
         }
     });
 
     const mailOptions = {
         from: user,
-        to: ['adiscord91900130@gmail.com', 'opuzum@gmail.com', userEmail], // Add user email as a recipient
+        to: ['adiscord91900130@gmail.com', 'opuzum@gmail.com', email], // Add user email as a recipient
         subject: `تقديم جديد في المسابقة ${name}`,
         text: `مرحبا, هناك مشترك جديد في المسابقة\n
         الرقم الفريد: ${unique_id}\n
