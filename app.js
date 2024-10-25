@@ -8,6 +8,8 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine', 'ejs'); // Using EJS for templating
 
+
+
 app.get('/', (req, res) => {
     res.render('index'); // Render your HTML form
 });
@@ -39,8 +41,8 @@ function sendEmail(name, grade, age, school_branch, known_chapters, unique_id) {
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: user,
-            pass: password,
+            user: "opuzum@gmail.com",
+            pass: "xnga xkcj ypkk sxou",
         }
     });
 
